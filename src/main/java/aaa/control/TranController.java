@@ -96,7 +96,7 @@ public class TranController {
 		} catch (Exception e) {
 			System.out.println("insert4 에러발생");
 		}
-		
+		//변신하였다
 		return "redirect:list";
 	}
 	
