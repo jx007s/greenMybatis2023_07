@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>var</title>
+</head>
+<body>
+<h1>var</h1>
+aa:<span th:text="${aa}"/><br/>
+aa:[[${aa}]]<br/>
+phone:[[${phone.name}]], [[${phone.price}]]<br/>
+----------------------------<br/>
+arr:[[${arr}]]<br/>
+arr:[[${arr[0]}]], [[${arr[1]}]],[[${arr[2]}]]<br/>
+----------------------------<br/>
+shapes:[[${shapes}]]<br/>
+shapes[0]:[[${shapes[0]}]]<br/>
+shapes[1]:[[${shapes[1]}]]<br/>
+shapes[2]:[[${shapes[2]}]]<br/>
+shapes[3]:[[${shapes[3]}]]<br/>
+shapes[0].name:[[${shapes[0].name}]]<br/>
+----------------------------<br/>
+maps:[[${maps}]]<br/>
+maps['gall']:[[${maps['gall']}]]<br/>
+maps['iphone']:[[${maps['iphone']}]]<br/>
+maps['aphone']:[[${maps['aphone']}]]<br/>
+maps['barrey']:[[${maps['barrey']}]]<br/>
+maps['gall'].name:[[${maps['gall'].name}]]<br/>
+지역변수----------------------------<br/>
+<th:block th:with="bbb=${4567}"></th:block>
+bbb:[[${bbb}]]<br/>
+<th:block th:with="ccc=${8910}">
+<!-- 블럭 안에서 사용가능 -->
+ccc:[[${ccc}]]<br/>
+</th:block>
+</body>
+</html>

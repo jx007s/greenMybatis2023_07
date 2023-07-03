@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>formform</title>
+</head>
+<body>
+<h1>formform</h1>
+
+<form action="" th:object="${person}">
+	<table border="">
+		<tr>
+			<td>이름</td>
+			<td><input type="text" th:field="*{pname}" /></td>
+		</tr>
+		<tr>
+			<td>결혼여부</td>
+			<td><input type="radio" name="marriage" th:checked="*{marriage}"  />기혼
+			<input type="radio" name="marriage" th:checked="*{!marriage}"  />미혼</td>
+		</tr>
+		<tr>
+			<td>취미</td>
+			<td>
+			<div th:each="hh : *{hobby}">
+					 <input type="checkbox" th:field="*{hobby}" th:value="${hh.key}" /> 
+					     <label th:for="${#ids.prev('hobby')}" th:text="${hh.value}"></label>
+			     </div>
+			</td>
+		</tr>
+		<tr>
+			<td>캐릭터</td>
+			<td>
+				<div th:each="ch : *{characters}">	
+					<input type="checkbox" name="chaaracter"  th:id="${ch}"  th:value="${ch}" 
+					 th:checked="${#lists.contains(person.chars,ch)}"/>
+					 <!-- th:checked="${#lists.contains(person.chars,ch)}"
+					 #lists.contains() 리스트에 요소가 있는지 확인
+					 #lists.contains(리스트, 찾을요소)
+					 리스트에 항목이 있으면 checked  하라	
+					  -->
+					<label  th:for="${ch}"  th:text="${ch}"></label>
+					<!-- id가  ${ch} 인 checkbox 클릭-->
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>성별</td>
+			<td>
+				<div th:each="gg : *{genders}">
+				<!-- <input type="radio" th:field="*{genders}" th:value="${gg}" th:attr="checked = ${gg=='it인' ? 'true' : 'false'}"/> -->
+					<input type="radio" name="gender" th:id="${gg}" th:value="${gg}" th:checked="${gg} == *{gender}"/>
+					<label  th:for="${gg}"  th:text="${gg}"></label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>이메일</td>
+			<td><input type="text" name="email1" />@
+				<select  th:field="*{email2}" > 
+				<!-- th:field="*{email2}" :  name = "email2", value="구글"(email2의 값) 으로 처리 -->
+					<option th:each="ee: *{emails}" th:value="${ee}" th:text="${ee}"></option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2"><input type="submit" /></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

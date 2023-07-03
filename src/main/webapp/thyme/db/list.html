@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>list</title>
+</head>
+<body>
+<h1>list</h1>
+<table border="">
+	<form action="" th:object="${boardDTO}">
+		<tr>
+			<td colspan="5" align="center">
+				제목
+				<input type="text" th:field="*{sch}"/>
+				갯수
+				<select th:field="*{cnt}">
+					<option th:each="no : ${#numbers.sequence(0,10,2)}" th:value="${no}" th:text="${no}"/>
+				</select>
+				<input type="submit" value="검색" />
+			</td>
+		</tr>
+	</form>
+	
+	<tr>
+		<td colspan="5">
+			<a href="/db/listPname/1">1</a>
+			<a href="/db/listPname/2">2</a>
+			<a href="/db/listPname/3">3</a>
+			<a href="/db/listPname/4">4</a>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>번호</td>
+		<td>제목</td>
+		<td>작성자</td>
+		<td>등록일</td>
+		<td>조회수</td>
+	</tr>
+	<tr th:each="dto , dtoStat: ${mainData}">
+		<td th:text="${dtoStat.index}"/>
+		<td><a th:href="@{|detail/${dto.id}|}" th:text="${dto.title}"/></td>
+		<td th:text="${dto.pname}"/>
+		<td th:text="${dto.reg_date}"/>
+		<td th:text="${dto.cnt}"/>
+	</tr>
+	<tr>
+		<td colspan="5" align="right">
+			<a th:href="@{insert}" th:text="글쓰기"/>
+			<a th:href="@{insertList}" th:text="다중글쓰기"/>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

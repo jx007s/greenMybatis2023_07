@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org/DTD Mapper3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="aaa.db.BoardMapper">
+
+	<select id="list" resultType="bDTO" parameterType="bDTO">
+		select * from board
+		<where>
+			<trim prefix='   ' suffixOverrides ='and | or'>
+				<if test='sch != null'>
+					title like concat('%',#{sch},'%') and 
+				</if>
+				
+				<if test='cnt != null'>
+					cnt >= #{cnt}
+				</if>
+			</trim>
+		</where>	
+	</select>
+	
+	
+	
+	<select id="listPname" resultType="bDTO" parameterType="bDTO">
+		select * from board
+		<where>
+			<choose>
+				<when test="pno == 1">
+					pname = '일공성진'
+				</when>
+				<when test="pno == 2">
+					pname = '이공성진'
+				</when>
+				<when test="pno == 3">
+					pname = '삼공성진'
+				</when>
+				<otherwise>
+					pname = '사공성진'
+				</otherwise>
+			
+			</choose>
+		</where>	
+	</select>
+	
+	
+	
+	
+	
+	<sql id="wid">
+	 	where id = #{id}
+	</sql>
+
+	<select id="detail" parameterType="bDTO" resultType="bDTO">
+		select * from board
+		<include refid="wid"/>
+	</select>
+	
+	<insert id="inserttt" parameterType="bDTO" >
+		<selectKey keyProperty="id" resultType="Integer" order="BEFORE">
+			select max(id)+1 from board
+		</selectKey>
+	
+		insert into board (id, title, pname, pw, content, upfile, reg_date, level, seq, cnt, gid)
+		values
+		(#{id}, #{title}, #{pname}, #{pw}, #{content}, #{upfile}, sysdate(), 0,0,0, #{id})
+	</insert>
+	
+	
+	<sql id="maxid">
+	 	(select max(id)+1 from board bb)
+	</sql>
+	
+	<insert id="insertList" parameterType="java.util.List">
+	
+		insert into board (id,title, pname, pw, content, upfile, reg_date, level, seq, cnt, gid)
+		values
+		
+		<foreach collection="list" item="dd" separator="," index="i">
+			(<include refid="maxid"/>+#{i}, #{dd.title}, #{dd.pname}, #{dd.pw}, 
+			#{dd.content}, #{dd.upfile}, sysdate(), 0,0,0, <include refid="maxid"/>+#{i} )
+		</foreach>
+		
+		
+	</insert>
+	
+	
+	<delete id="deleteee"  parameterType="bDTO">
+		delete from board where id = #{id} and pw = #{pw}
+	</delete>
+	
+	<update id="modifyyy" parameterType="bDTO">
+		update board set title = #{title}, pname =  #{pname}, content = #{content}
+		where id = #{id} and pw = #{pw}
+	</update>
+</mapper>

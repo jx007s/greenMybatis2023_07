@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>control</title>
+</head>
+<body>
+<h1>control</h1>
+
+<th:block th:with="a=30">
+<h2>if</h2>
+a : [[${a}]]<br/>
+th:if="${a >= 20}" : <span th:text="'20이상'" th:if="${a >= 20}"/><br/>
+th:if="${a >= 40}" : <span th:text="'40이상'" th:if="${a >= 40}"/><br/>
+
+<h2>unless(not if)</h2>
+a : [[${a}]]<br/>
+th:unless="${a >= 20}" : <span th:text="'20이상이 아니야'" th:unless="${a >= 20}"/><br/>
+th:unless="${a >= 40}" : <span th:text="'40이상이 아니야'" th:unless="${a >= 40}"/><br/>
+
+<h2>switch</h2>
+a : [[${a}]]<br/>
+<div th:switch="${a}"><!-- 최초 같은 case 구간만 실행하고 탈출 -->
+	<span th:case = "10">10이냐?</span>
+	<span th:case = "20">20이냐?</span>
+	<span th:case = "30">30이냐?</span>
+	<span th:case = "10">10이냐?2</span>
+	<span th:case = "30">30이냐?2</span><!-- 실행하지 않음 -->
+</div>
+</th:block>
+
+<h2>each</h2>
+<h3>array</h3>
+<!-- 
+	each="no ,        arrStat: ${arr}" 
+		  원소,   열거데이터정보 :  열거데이터
+-->
+<table border="" >
+	<tr th:each="no , arrStat: ${arr}">
+		<td th:text="${no}"></td>
+		<!--<td th:text="${arrStat}"></td> {index = 0, count = 1, size = 6, current = 11} -->
+		<td th:text="${arrStat.index}"></td>
+		<td th:text="${arrStat.size}"></td>
+		<td th:text="${arrStat.current}"></td>
+	</tr>
+</table>
+
+<h3>maps</h3>
+<table border="" >
+	<tr th:each="dd , mapStat: ${maps}">
+		<!-- <td th:text="${mapStat}"></td>
+		{index = 0, count = 1, size = 4, current = barrey=HandPhone(name=딸기폰, price=0)} -->
+		<td th:text="${mapStat.index}"></td>
+		<!-- <td th:text="${mapStat.current}"></td> -->
+		<td th:text="${dd.key}"></td>
+		<td th:text="${dd.value}"></td>
+		<td th:text="${dd.value.name}"></td>
+		<td th:text="${dd.value.price}"></td>
+	</tr>
+</table>
+
+</body>
+</html>

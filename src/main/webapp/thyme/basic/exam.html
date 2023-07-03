@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>exam</title>
+</head>
+<body>
+<h1>exam</h1>
+<table border="">
+	<tr>
+		<td>이름</td>
+		<td th:text="${name}"></td>
+	</tr>
+	<tr>
+		<td>국어</td>
+		<td th:text="${kor}"></td>
+	</tr>
+	<tr>
+		<td>영어</td>
+		<td th:text="${eng}"></td>
+	</tr>
+	<tr>
+		<td>수학</td>
+		<td th:text="${mat}"></td>
+	</tr>
+<th:block th:with="tot=${kor+eng+mat}">	
+<th:block th:with="avg=${tot/3}">	
+	<tr>
+		<td>총점</td>
+		<td th:text="${tot}"></td>
+	</tr>
+	<tr>
+		<td>평균</td>
+		<td th:text="${avg}"></td>
+	</tr>
+	<tr>
+		<td>등급</td>
+		<td th:text="${avg >= 90 ? '수'  : avg >= 80 ? '우'  : avg >= 70 ? '미'  : avg >= 60 ? '양'  : '가'}"></td>
+	</tr>
+</th:block>		
+</th:block>	
+</table>
+</body>
+</html>

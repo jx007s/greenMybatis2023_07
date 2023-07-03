@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>deleteForm</title>
+</head>
+<body>
+<h1>deleteForm</h1>
+<form method="post">
+	<table border="">
+		<tr>
+			<td>암호</td>
+			<td><input type="text" name="pw"/></td>
+		</tr>
+
+		<tr>
+			<td colspan="2" align="center"> 
+				<input type="submit" value="삭제" />
+				<a th:href="|/db/detail/${boardDTO.id}|" th:text="뒤로"/>
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>link</title>
+</head>
+<body>
+<h1>link</h1>
+<a href="aaa">aaa</a>
+<a th:href="@{/bbb}">/bbb</a>
+<a th:href="@{ccc}">ccc</a>
+<a th:href="@{|/${cate1}/${cate2}|}">|/${cate1}/${cate2}|</a>
+<a th:href="@{ddd(prod=${pp1},page=${pp2})}">ddd(prod=${pp1},page=${pp2})</a>
+<a th:href="@{|/${cate1}/${cate2}|(prod=${pp1},page=${pp2})}">|/${cate1}/${cate2}|(prod=${pp1},page=${pp2})</a>
+</body>
+</html>

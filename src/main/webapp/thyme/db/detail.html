@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>detail</title>
+</head>
+<body>
+<h1>detail</h1>
+<table border="">
+	<tr>
+		<td>번호</td><td th:text="${mainData.id}"/>
+	</tr><tr>
+		<td>제목</td><td th:text="${mainData.title}"/>
+	</tr><tr>
+		<td>작성자</td><td th:text="${mainData.pname}"/>
+	</tr><tr>
+		<td>등록일</td><td th:text="${mainData.reg_date}"/>
+	</tr><tr>
+		<td>조회수</td><td th:text="${mainData.cnt}"/>
+	</tr><tr>
+		<td>파일</td><td th:text="${mainData.upfile}"/>
+	</tr><tr>
+		<td>내용</td><td th:text="${mainData.content}"/>
+	</tr><tr>
+		<td colspan="2" align="right">
+			<a th:href="|/db/list|" th:text="목록으로" />
+			<a th:href="|/db/modify/${mainData.id}|" th:text="수정"/>
+			<a th:href="|/db/delete/${mainData.id}|" th:text="삭제"/>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

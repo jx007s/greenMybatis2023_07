@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>joinForm</title>
+<style>
+.e_msg{
+	color: #f00;
+}
+</style>
+</head>
+<body>
+<h1>joinForm</h1>
+<form action="joinGo" method="post" th:object="${member}">
+<table border="">
+	<tr>
+		<td>아이디</td>
+		<td><input type="text" name="pid" />
+		<!-- th:field="*{pid}" 로 지정하지 않아  value 에 값을 넣지 않는다 -->
+		<p class="e_msg"  th:if="${#fields.hasErrors('pid')}" th:errors="*{pid}">에러다</p>
+		</td>
+	</tr>
+	<tr>
+		<td>암호</td>
+		<td><input type="text" th:field="*{pw1}" />
+		<!-- 
+		th:field="*{pw1}"         자동으로   value 를 넣어준다 
+		th:if="${#fields.hasErrors('pw1')}"  pw1 에 에러가 있다면 현재 element를 활성화 한다.
+		th:errors="*{pw1}"                   pw1 에러 message를 text로 보인다.   
+		                                      기존 text 인 "에러다"는 사라진다.
+		-->
+		<p class="e_msg"  th:if="${#fields.hasErrors('pw1')}" th:errors="*{pw1}">에러다</p>
+		</td>
+	</tr>
+	<tr>
+		<td>암호확인</td>
+		<td><input type="text" th:field="*{pw2}" />
+			<p class="e_msg"  th:if="${#fields.hasErrors('pw2')}" th:errors="*{pw2}">에러다</p>
+		</td>
+	</tr>
+	<tr>
+		<td>이름</td>
+		<td><input type="text" th:field="*{pname}" />
+			<p class="e_msg"  th:if="${#fields.hasErrors('pname')}" th:errors="*{pname}">에러다</p>
+		</td>
+	</tr>
+	<tr>
+		<td>이메일</td>
+		<td><input type="text" name="email" /></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" value="회원가입" />
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
